@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { FaAngleDoubleRight } from 'react-icons/fa'
 // ATTENTION!!!!!!!!!!
 // I SWITCHED TO PERMANENT DOMAIN
-const url = 'https://course-api.com/react-tabs-project'
+const url = 'https://course-api.com/react-tabs-project';
 const App=()=> {
   const[loading, setLoading]=useState(true);
   const[jobs, setJobs]= useState([]) ;
@@ -11,15 +11,19 @@ const App=()=> {
   const response= await fetch(url);
   const newJobs= await response.json();
   setJobs(newJobs);
-  setLoading(false);
+  setInterval(() => {
+    setLoading(false);
+}, 1000);
+
   }
+
   useEffect(() => {
     fetchJobs();
   },[])
   if(loading){
     return(
       <section className="section loading">
-        <h1>loading...</h1>
+        <div id="loader"></div>
       </section>
     );
   }
@@ -33,7 +37,7 @@ const App=()=> {
       <div className='jobs-center'>
       <div className='job-info'>
         {jobs.map((h,m)=>{
-          return  <button key={h.id} onClick={()=>setValue(m)} className="job-btn">{h.company}</button>
+          return  <button key={m} onClick={()=>setValue(m)} className="job-btn">{h.company}</button>
         })}
       </div>
         <article className='job-info'>
